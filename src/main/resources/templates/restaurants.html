@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Restaurants</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{header :: navbar}"></div>
+<div class="container">
+    <h1>Restaurants</h1>
+
+    <!-- Error Message -->
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}" style="color: red;"></p>
+    </div>
+
+    <!-- Search by ID -->
+    <div class="search-section">
+        <form th:action="@{/restaurants/management/search}" method="get">
+            <label for="restaurantId">Search by ID:</label>
+            <input type="text" id="restaurantId" name="id" placeholder="Enter Restaurant ID" required>
+            <button type="submit" class="btn">Search</button>
+        </form>
+    </div>
+
+    <!-- Restaurant Table -->
+    <div class="table-section">
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through restaurants -->
+            <tr th:each="restaurant : ${restaurants}">
+                <td th:text="${restaurant.name}">Restaurant Name</td>
+                <td th:text="${restaurant.address}">Restaurant Address</td>
+                <td th:text="${restaurant.phoneNumber}">Restaurant Phone</td>
+                <td>
+                    <!-- View Details -->
+                    <a th:href="@{/restaurants/management/search(id=${restaurant.restaurantID})}" class="btn">View Details</a>
+                    <!-- Delete Button -->
+                    <form th:action="@{/restaurants/management/delete/' + ${restaurant.restaurantID}}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add a New Restaurant -->
+    <div class="add-section">
+        <h2>Add New Restaurant</h2>
+        <form th:action="@{/restaurants/management/add}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter Restaurant Name" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" placeholder="Enter Restaurant Address" required>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" required>
+            <button type="submit" class="btn">Add Restaurant</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${restaurant.name}">Restaurant Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="header :: navbar"></div>
+    <div class="container">
+        <h1 th:text="${restaurant.name}">Restaurant Name</h1>
+        <p><strong>Address:</strong> <span th:text="${restaurant.address}">Address</span></p>
+        <p><strong>Phone Number:</strong> <span th:text="${restaurant.phoneNumber}">Phone Number</span></p>
+        <p><strong>Number of Tables:</strong> <span th:text="${restaurant.numberOfTables}">Number of Tables</span></p>
+        <a th:href="@{/restaurants/management}" class="btn">Back to Restaurants</a>
+    </div>
+</body>
+</html>

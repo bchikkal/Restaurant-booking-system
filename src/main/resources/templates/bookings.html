@@ -1,0 +1,42 @@
+<!-- bookings.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Bookings</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="header :: navbar"></div>
+    <div class="container">
+        <h1>My Bookings</h1>
+        <a th:href="@{/bookings/create}" class="btn">Create a Booking</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Restaurant</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Number of People</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="detail : ${bookingDetails}">
+                    <td th:text="${detail.booking.bookingId}"></td>
+                    <td th:text="${detail.restaurantName}"></td>
+                    <td th:text="${detail.booking.date}"></td>
+                    <td th:text="${detail.booking.time}"></td>
+                    <td th:text="${detail.booking.numberOfPeople}"></td>
+                    <td th:text="${detail.booking.status}"></td>
+                    <td>
+                        <a th:href="@{'/bookings/' + ${detail.booking.bookingId} + '/edit'}">Edit</a> |
+                        <a th:href="@{'/bookings/' + ${detail.booking.bookingId} + '/delete'}" class="btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

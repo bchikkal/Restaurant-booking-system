@@ -1,0 +1,32 @@
+<!-- createBooking.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Booking</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="header :: navbar"></div>
+    <div class="container">
+        <h1>Create a Booking</h1>
+        <form th:action="@{/bookings/create}" th:object="${booking}" method="post">
+            <label>Restaurant:</label>
+            <select th:field="*{restaurantId}">
+                <option value="" disabled th:if="${booking.restaurantId == null}" selected>Select a Restaurant</option>
+                <option th:each="restaurant : ${restaurants}"
+                        th:value="${restaurant.restaurantId}"
+                        th:text="${restaurant.name}"
+                        th:selected="${restaurant.restaurantId == booking.restaurantId}">
+                </option>
+            </select>
+            <label>Date:</label>
+            <input type="date" th:field="*{date}" required/>
+            <label>Time:</label>
+            <input type="time" th:field="*{time}" required/>
+            <label>Number of People:</label>
+            <input type="number" th:field="*{numberOfPeople}" required min="1"/>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

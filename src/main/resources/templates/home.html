@@ -1,0 +1,15 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home - Restaurant Booking System</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="header :: navbar"></div>
+    <div class="container">
+        <h1>Welcome to the Restaurant Booking System</h1>
+        <p>Please <a th:href="@{/users/register}">Register</a> or <a th:href="@{/users/login}">Login</a> to continue.</p>
+    </div>
+</body>
+</html>

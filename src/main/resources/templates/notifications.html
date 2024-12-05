@@ -1,0 +1,27 @@
+<!-- notifications.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notifications</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="header :: navbar"></div>
+    <div class="container">
+        <h1>Notifications</h1>
+        <div th:if="${notifications.isEmpty()}">
+            <p>You have no notifications.</p>
+        </div>
+        <div th:unless="${notifications.isEmpty()}">
+            <ul>
+                <li th:each="notification : ${notifications}">
+                    <div class="alert" th:classappend="${notification.status == 'Success'} ? ' success'">
+                        <p th:text="${notification.text}">Notification Text</p>
+                        <p><strong>Status:</strong> <span th:text="${notification.status}">Status</span></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

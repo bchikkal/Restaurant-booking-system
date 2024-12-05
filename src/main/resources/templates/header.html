@@ -1,0 +1,30 @@
+<!-- header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="navbar">
+<head>
+    <title>Restaurant Booking System</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div class="container navbar">
+            <div>
+                <a th:href="@{/}">Home</a>
+                <a th:href="@{/restaurants}">Restaurants</a>
+                <a th:href="@{/bookings}">My Bookings</a>
+                <a th:href="@{/notifications}">Notifications</a>
+            </div>
+            <div>
+                <span th:if="${user != null}">
+                    Logged in as <strong th:text="${user.name}">User</strong> |
+                    <a th:href="@{/users/logout}">Logout</a>
+                </span>
+                <span th:if="${user == null}">
+                    <a th:href="@{/users/login}">Login</a>
+                    <a th:href="@{/users/register}" class="btn">Register</a>
+                </span>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
