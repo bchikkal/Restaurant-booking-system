@@ -1,4 +1,5 @@
 package com.group63.Restaurant_booking.system.Controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,17 +9,25 @@ import javax.management.Notification;
 import java.util.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group63.Restaurant_booking.system.Entity.Users;
+import com.group63.Restaurant_booking.system.Services.NotificationService;
+import com.group63.Restaurant_booking.system.Services.UserService;
+
 @RequestMapping("/")
 @Controller
 public class HomeController {
 
+    @Autowired
+    public NotificationService notificationService;
+
+    @Autowired
+    public UserService userService;
 
     @GetMapping("/")
     public String showDashboard(Model model) {
         model.addAttribute("user", Map.of("name", "Junichi"));
         return "dashboard";
     }
-
 
     @GetMapping("/restaurants")
     public String restaurantsPage() {
@@ -31,8 +40,9 @@ public class HomeController {
     }
 
     @GetMapping("/notifications")
-    public String notificationsPage() {
+    public String notificationsPage(Model model) {
+        Users u = userService.getUsersByName("Junichi").get(0);
+        model.addAttribute("notifications", notificationService.getNotificationsByUserID(u.getUserID()));
         return "notifications"; // notifications.html
     }
-
 }
