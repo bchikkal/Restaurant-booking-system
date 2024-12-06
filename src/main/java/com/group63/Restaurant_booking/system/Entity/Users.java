@@ -1,35 +1,41 @@
 package com.group63.Restaurant_booking.system.Entity;
+
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
-
 @Entity
-@Table(name="Users")
+@Table(name = "\"Users\"")
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "\"UserID\"")
+    private Integer UserID;
 
-   private Integer UserID;
-
+    @Column(name = "\"name\"")
     private String name;
+
+    @Column(name = "\"PhoneNumber\"")
     private String PhoneNumber;
+
+    @Column(name = "\"Email\"")
     private String Email;
+
+    @Column(name = "\"Password\"")
     private String Password;
 
+    public Users() {
+    }
 
-     public Users () {
-     }
+    public Users(String Name, String PhoneNumber, String Email, String Password) {
 
-    public Users (String Name, String PhoneNumber, String Email, String Password) {
+        this.name = Name;
+        this.PhoneNumber = PhoneNumber;
+        this.Email = Email;
+        this.Password = Password;
 
-         this.name = Name ;
-         this.PhoneNumber = PhoneNumber;
-         this.Email= Email;
-         this.Password = Password;
-
-     }
+    }
 
     public String getName() {
         return name;
@@ -84,8 +90,10 @@ public class Users {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Users users = (Users) o;
         return UserID.equals(users.UserID) && Email.equals(users.Email);
     }

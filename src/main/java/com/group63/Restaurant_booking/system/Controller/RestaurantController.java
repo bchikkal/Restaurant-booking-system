@@ -57,7 +57,6 @@ public class RestaurantController {
         return "restaurantDetails"; // Render the restaurantDetails.html template
     }
 
-
     // Delete a restaurant by ID
     @PostMapping("/delete/{id}")
     public String deleteRestaurantById(@PathVariable Integer id) {

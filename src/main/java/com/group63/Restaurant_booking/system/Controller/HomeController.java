@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.group63.Restaurant_booking.system.Entity.Users;
 import com.group63.Restaurant_booking.system.Services.NotificationService;
+import com.group63.Restaurant_booking.system.Services.RestaurantService;
 import com.group63.Restaurant_booking.system.Services.UserService;
 
 @RequestMapping("/")
@@ -22,6 +23,9 @@ public class HomeController {
 
     @Autowired
     public UserService userService;
+
+    @Autowired
+    public RestaurantService restaurantService;
 
     @GetMapping("/")
     public String showDashboard(Model model) {
@@ -41,8 +45,10 @@ public class HomeController {
 
     @GetMapping("/notifications")
     public String notificationsPage(Model model) {
-        Users u = userService.getUsersByName("Junichi").get(0);
-        model.addAttribute("notifications", notificationService.getNotificationsByUserID(u.getUserID()));
+        System.out.println(restaurantService.getAllRestaurants().get(0).toString());
+        // Users u = userService.getUsersByName("Junichi").get(0);
+        model.addAttribute("user", Map.of("name", "Junichi"));
+        model.addAttribute("notifications", notificationService.getNotificationsByUserID(1));
         return "notifications"; // notifications.html
     }
 }

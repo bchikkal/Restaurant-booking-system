@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Restaurants {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "\"restaurantID\"") // Use quotes to match the case-sensitive column name
     private Integer restaurantID;
 
@@ -23,7 +23,8 @@ public class Restaurants {
     @Column(name = "\"phoneNumber\"")
     private String phoneNumber;
 
-    public Restaurants() {}
+    public Restaurants() {
+    }
 
     public Restaurants(String name, String address, Integer numberOfTables, String phoneNumber) {
         this.name = name;
